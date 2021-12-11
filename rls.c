@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <dirent.h>
 
@@ -14,7 +15,7 @@ int main(int argc, const char **argv) {
 
         struct dirent *entry;
         while((entry = readdir(dir)) != NULL) {
-                if(entry->d_type != 4) { /* Entries of type 4 are: '.' and '..'. */
+                if(strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
                         printf("%s | ", entry->d_name);
                 }
         }
